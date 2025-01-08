@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/PMS_FRONTEND/static/css/main.361600a8.css",
+    "main.js": "/PMS_FRONTEND/static/js/main.505a6174.js",
+    "static/media/logo.jpg": "/PMS_FRONTEND/static/media/logo.466639c775f9a2dbfe8d.jpg",
+    "index.html": "/PMS_FRONTEND/index.html",
+    "main.361600a8.css.map": "/PMS_FRONTEND/static/css/main.361600a8.css.map",
+    "main.505a6174.js.map": "/PMS_FRONTEND/static/js/main.505a6174.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.361600a8.css",
+    "static/js/main.505a6174.js"
+  ]
+}
