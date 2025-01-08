@@ -1,0 +1,82 @@
+/* Container for each input field */
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Input styling */
+.guest-details input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    margin-top: 5px;
+    border-radius: 25px;
+    border: 2px solid #ccc; 
+    box-sizing: border-box;
+    height: 50px;
+    background-color: #fff;
+    transition: border-color 0.3s ease; 
+}
+
+/* Label outside the input field */
+.outside-label {
+    display: block;
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+/* Style for required asterisk */
+.required {
+    color: red;
+    margin-left: 3px; /* Spacing between the text and the asterisk */
+}
+
+/* Valid state: green border only when valid */
+.guest-details input.valid {
+    border-color: #4caf50 !important;
+}
+
+/* Invalid state: red border when invalid */
+.guest-details input.invalid {
+    border-color: red !important;
+}
+
+/* Default state: gray border remains gray when empty or not focused */
+.guest-details input:not(:focus):not(.valid):not(.invalid) {
+    border-color: #ccc !important;
+}
+
+/* Ensure focused inputs are not green by default */
+.guest-details input:focus {
+    outline: none;
+    border-color: #ccc; /* Maintain gray color on focus */
+}
+
+/* Floating label effect */
+.inside-label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #aaa;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Floating label when typing or focused */
+.guest-details input:focus + .inside-label,
+.guest-details input:not(:placeholder-shown) + .inside-label {
+    top: -6px;
+    font-size: 14px;
+    color: #4caf50;
+    opacity: 0; /* Disappear when input is filled */
+}
+
+/* Error message styling */
+.error-message {
+    font-size: 14px;
+    color: red;
+    margin-top: 5px;
+}

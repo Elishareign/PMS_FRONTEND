@@ -1,0 +1,299 @@
+ /* Header Section */
+
+.room-container {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 20px;
+}
+
+.room-header h2 {
+  font-size: 40px;
+  font-weight: 1000;
+  color: #18304A;
+}
+
+
+ /* Filter Section */
+
+ .room-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.room-filters select,
+.room-filters input {
+  padding: 10px;
+  font-family: "Poppins", sans-serif; 
+  margin-right: 10px; 
+  font-size: 14px;
+}
+
+.room-filters .filter-by {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.filter-item {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.filter-item label {
+  margin-right: 10px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.filter-item select {
+  padding: 5px;
+}
+
+.room-container .room-filters select {
+  padding: 10px 15px;
+  font-size: 14px;      /* Adjust font size to match the search box */
+  height: 38px;         /* Set the same height here as well */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 150px;
+  outline: none;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.room-container .room-filters select:hover {
+  border-color: #18304A;
+}
+
+.room-container .room-filters select:focus {
+  border-color: #18304A;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.filter-search input { 
+  padding: 8px 15px;  
+  font-size: 14px;      
+  border: 2px solid #ddd; 
+  border-radius: 4px;  
+  width: 300px; 
+  height: 38px;         
+  transition: border-color 0.3s ease; 
+}
+
+.filter-search {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 35px; 
+}
+
+
+.filter-search input:focus {
+    border-color: #18304A; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+  
+.filter-search select {
+  padding: 5px 10px;
+  font-size: 50px;
+  font-family: Arial;
+  width: 100%; 
+  max-width: 200px; 
+  height: 50px;
+}
+
+/* Date Range */
+.date-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.date-range-inputs input {
+  font-size: 15px; 
+  padding: 10px; 
+  height: 40px; 
+  border: 1px solid #ccc; 
+  border-radius: 10px; 
+  outline: none;
+}
+
+.date-range-inputs input:focus {
+  border-color: #007bff; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+.date-separator {
+  margin: 0 10px; 
+  color: #333; 
+  font-size: 1rem; 
+  font-weight: bold; 
+}
+
+
+/* Buttons */
+.add-room-btn {
+  background-color: #18304A;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-left: 0rem;
+  width: 100%; 
+  max-width: 150px; 
+  height: 50px;
+  align-self: flex-end; 
+}
+
+  
+.add-room-type-btn {
+  background-color: #18304A;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 10px;
+  margin-top: 25px;
+  height: 50px;
+  margin-left: auto; 
+  display: block;
+  width: max-content;
+}
+
+
+.add-room-type-btn:hover,
+.add-room-btn:hover {
+  background-color: #0057b3cb;
+}
+
+/* Table */
+.room-table-container {
+  margin-top: 50px;
+  background-color: #ffffff;
+  overflow-x: auto; 
+  width: 1370px;
+  align-items: center;
+}
+
+.room-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+
+.room-table th,
+.room-table td {
+  padding: 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  width: 300px;
+  font-size: 15px;
+  font-family: "Poppins";
+  color: black;
+}
+
+.room-table th {
+  background-color: #f4f4f4;
+  color: #18304A; 
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+ 
+}
+
+
+/* Status */
+
+.status {
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+}
+
+.status.available {
+  background-color: #4CAF50; 
+  color: white;
+  font-size: 15px;
+}
+
+.status.occupied {
+  background-color: #FF4D4D; 
+  color: white;
+  font-size: 15px;
+}
+
+.status.reserved {
+  background-color: #FF9800; 
+  color: white;
+  font-size: 15px;
+}
+
+.status.out-of-order {
+  background-color: #9E9E9E; 
+  color: white;
+  font-size: 15px;
+}
+
+.status.in-maintenance {
+  background-color: #FFEB3B; 
+  color: black; 
+  font-size: 15px;
+}
+
+
+/* Action buttons */
+.room-table td button {
+  padding: 8px 12px;
+  margin: 3px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px; 
+  transition: all 0.3s ease;
+  margin-bottom: 5px;
+}
+
+/* Edit button styles */
+.room-table td button:first-child {
+  background-color: #ed6e0e; 
+  color: white;
+}
+
+.room-table td button:first-child:hover {
+  background-color: #dc470c; 
+}
+
+/* Archive button styles */
+.room-table td button:last-child {
+  background-color: #f44336; 
+  color: white;
+}
+
+.room-table td button:last-child:hover {
+  background-color: #de1304; 
+}
+
+/* Optional: Add focus style for accessibility */
+.room-table td button:focus {
+  outline: 2px solid #ffa500; /* Add a border on focus */
+  outline-offset: 2px;
+}
+

@@ -1,0 +1,228 @@
+.guest-container {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  
+}
+
+.guest-container h2{
+  font-size: 40px;
+  font-weight: 1000;
+  color: #18304A;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 20px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.filter-group {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.filter-group label{
+  margin-right: 10px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+input, select {
+  padding: 10px 15px;
+  font-size: 14px;      /* Adjust font size to match the search box */
+  height: 38px;         /* Set the same height here as well */
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  width: 150px;
+  outline: none;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.filter-group input {
+  margin-top: 40px;
+  padding: 8px 15px;   /* Same padding as the filter dropdown */
+  font-size: 14px;      /* Same font size */
+  border: 2px solid #ddd; 
+  border-radius: 4px;  
+  width: 300px; 
+  height: 38px;         /* Explicitly set the height to match the dropdown */
+  transition: border-color 0.3s ease; 
+  border-radius: 10px;
+}
+
+.filter-group input:focus {
+  border-color: #18304A; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+.filter-label{
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+
+label {
+  margin-bottom: 5px;
+}
+
+/* Move the search box to the far right */
+.filter-group:last-child {
+  margin-left: auto; /* This will push the search box to the far right */
+  width: 250px; /* Make the search box wider if desired */
+}
+
+
+/* Table Container */
+table {
+  margin-top: 50px;
+  background-color: #ffffff;
+  overflow-x: auto; 
+  width: 1370px;
+  align-items: center;
+  
+}
+
+/* Table Headers */
+thead th {
+  background-color: #f4f4f4;
+  color: #18304A; 
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  width: 300px;
+  font-size: 18px;
+  font-family: "Poppins";
+}
+
+.data-grid td {
+  padding: 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  width: 300px;
+  font-size: 15px;
+  font-family: "Poppins";
+}
+
+/* Table Rows */
+tbody tr {
+  padding: 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  width: 300px;
+  font-family: "Poppins";
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Zebra-striping effect */
+}
+
+/* Table Data Cells */
+tbody td {
+  padding: 12px 15px;
+  font-size: 18px;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+/* Action Buttons (Edit & Archive) */
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+button.edit {
+  background-color: #4f94d6; /* Edit button background */
+  color: white;
+}
+
+button.archive {
+  background-color: #f44336; /* Archive button background */
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8; /* Slight opacity on hover */
+}
+
+/* Action Column Alignment */
+th:last-child, td:last-child {
+  text-align: center;
+}
+
+/* Table Hover Effect */
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.guest-container table tbody td:nth-child(9){
+  display: flex;          
+  justify-content: flex-start; 
+  gap: 5px;             
+}
+
+/* Action Buttons Styling */
+.guest-container table tbody td button {
+  padding: 8px 12px;
+  margin: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px; 
+  transition: all 0.3s ease;
+  margin-bottom: 2px;
+  
+ 
+}
+
+.guest-container table tbody td button:first-of-type {
+  background-color: #ed6e0e; 
+  color: white;
+  border-radius: 20px;
+}
+
+.guest-container table tbody td button:first-of-type:hover {
+  background-color: #dc470c; 
+}
+
+.guest-container table tbody td button:last-of-type {
+  background-color: #f44336;
+  color: white;
+  border-radius: 20px;
+}
+
+.guest-container table tbody td button:last-of-type:hover {
+  background-color: #de1304; 
+}
+
+
+@media (max-width: 768px) {
+  .filter-row {
+    flex-direction: column; 
+  }
+
+  .filter-group:last-child {
+    margin-left: 0; 
+    width: 100%; 
+  }
+}

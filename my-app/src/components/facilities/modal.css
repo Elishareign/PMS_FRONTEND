@@ -1,0 +1,325 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  height: 200%;
+  width: 900px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* Limit the height of the modal content */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+ 
+}
+
+form label {
+  margin-bottom: 10px;
+}
+
+form input,
+form select,
+form button {
+  margin-bottom: 15px;
+  padding: 8px;
+  font-size: 14px;
+}
+#facilitycat{
+  font-size:1.3rem;
+  margin-left: 0.5rem;
+  margin-bottom: 20px;
+}
+#pickaction{
+  margin-left:2rem ;
+  font-size: 1rem;
+}
+#titleaddfacilites{
+  margin-bottom: 2rem;
+}
+
+
+div label.checkbox {
+  margin-top: 7px;
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 3rem; /* Optional: keeps the same indentation */
+
+}
+
+div label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+.Facilitycatergory{
+  
+  margin-left: 90px;
+  display: block;
+  font-size: 1rem;
+  
+}
+.Facilityname {
+  margin-top: 10px;
+  margin-left: 90px;
+  display: flex;
+  flex-direction: column; /* Aligns elements vertically */
+  font-size: 1rem;
+}
+
+.Facilityname label {
+  margin-bottom: 15px; /* Adds spacing between each label */
+  display: block; /* Ensures each label starts on a new line */
+}
+
+.Facilityname input,
+.Facilityname select {
+  margin-top: 5px;
+  font-size: 14px;
+  width:93%;
+  padding: 15px; /* Adds padding inside the input for better spacing */
+  border: 1px solid #18304a; /* Adds a light gray border */
+  border-radius: 5px; /* Rounds the corners */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle inset shadow */
+  background-color: #fff; /* Ensures a white background */
+}
+
+.Facilityname input:focus,
+.Facilityname select:focus {
+  border-color: #18304a; /* Changes border color on focus (blue for accessibility) */
+  outline: none; /* Removes the default outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a subtle glow effect on focus */
+}
+#facilityType{
+  border-color: #18304a;
+  background-color: #DBDBDB;
+}
+
+
+#FdetailsTitle {
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  margin-bottom: 20px;
+}
+
+.Facilityname input[type="file"] {
+  margin-top: 5px;
+  font-size: 14px;
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #18304a;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.Facilityname input[type="file"]:focus {
+  border-color: #18304a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#upload-image{
+  margin-top: 10px;
+  margin-left: 90px;
+  font-size: 1rem;
+}
+#Fimage{
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column; 
+  border-color: #18304a;
+  width: 93%;
+  height: 100%;
+}
+
+#Facility-name{
+  margin-left: 90px;
+  display: block;
+  font-size: 1rem;
+}
+
+/* Flexbox for inputs */
+.facility-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  margin-top: 20px;
+  margin-left: 38px;
+}
+
+.input-pair {
+  display: flex;
+  flex-direction: column;
+  width: 40%; 
+  margin-bottom: 15px;
+}
+
+.input-pair label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.input-pair input,
+.input-pair select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #18304a;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.input-pair input:focus,
+.input-pair select:focus {
+  border-color: #18304a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+.Facility-Description {
+  display: flex;
+  flex-direction: column;
+  width: 40%; 
+  margin-bottom: 15px;
+  margin-left: 250px;
+}
+
+.Facility-Description input,
+.Facility-Description select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #18304a;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+#Facility-Operational {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  margin-bottom: 20px;
+}
+
+.operational-times {
+  display: flex;
+  justify-content:space-evenly;
+  margin-top: 20px;
+  margin-left:60px;
+  width: 90%;
+}
+
+.time-pair {
+  display: flex;
+  flex-direction: column;
+  width: 45%; /* Adjusts the width to fit both inputs */
+}
+
+.time-pair label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.time-pair input {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #18304a;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.time-pair input:focus {
+  border-color: #18304a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+
+#button {
+  margin-top: 20px; /* Adds extra space from the input above */
+  margin-left: 11rem;/* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+  width: 50%; /* Make the button wider */
+  padding: 15px 20px; /* Adjust padding for better proportions */
+  font-size: 18px; /* Increase font size for better readability */
+  background-color: #18304a; /* Dark blue button */
+  color: white; /* White text */
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center; /* Ensures text is centered */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+#button:hover {
+  background-color: #0056b3; /* Change to a darker blue on hover */
+}
+
+/* Styling for the new operational options section */
+.operational-options {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-left: 60px;
+  width: 90%;
+}
+
+.option-pair {
+  display: flex;
+  flex-direction: column;
+  width: 26%; /* Adjusts the width to fit all three inputs */
+}
+
+.option-pair label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.option-pair select,
+.option-pair input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #18304a;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.option-pair select:focus,
+.option-pair input:focus {
+  border-color: #18304a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

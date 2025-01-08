@@ -1,0 +1,164 @@
+
+.facilities-container {
+
+  padding: 20px;
+  font-family: Arial;
+}
+
+.facilities-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 20px;
+}
+
+.facilities-header h2 {
+  font-size: 40px;
+  font-weight: 1000;
+  color: #18304A;
+}
+
+.current-date {
+  font-size: 16px;
+  color: #4f4f4f;
+}
+
+.filter-bar {
+  margin: 10px 0;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 50px; 
+}
+
+.search-bar select{
+  padding: 5px 10px;
+  font-size: 50px;
+  font-family: Arial;
+  width: 100%; 
+  max-width: 200px; 
+  height: 50px;
+  width: 150px;
+   
+}
+
+.filter-group {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+#facilityCategoryName {
+  width: 100%;
+  height: 50px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  color: #333;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+.filter-label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 18px;
+  font-family: Arial;
+}
+
+.filter-dropdown {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.reset-button {
+  background-color: red;
+  margin-top: 60px;
+  color: white;
+  cursor: pointer;
+  width: 100%; 
+  max-width: 150px; 
+  height: 40px;
+  border-radius: 10px;
+
+}
+
+.add-facilities-button {
+  background-color: #18304A;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-left: 0rem;
+  width: 100%; 
+  max-width: 150px; 
+  height: 50px;
+  align-self: flex-end; 
+  margin-top: 70px;
+  cursor: pointer;
+}
+
+
+.facilities-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  margin-top: 50px;
+  background-color: #ffffff;
+  overflow-x: auto; 
+  width: 1370px;
+  align-items: center;
+}
+
+.facilities-table th,
+.facilities-table td {
+  padding: 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  width: 300px;
+  font-size: 15px;
+  font-family: Arial;
+  color: black;
+}
+
+
+.facilities-table th {
+  background-color: #f4f4f4;
+  color: #18304A; 
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.facilities-table img {
+  width: 50px;
+  height: 50px;
+}
