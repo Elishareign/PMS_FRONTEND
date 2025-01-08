@@ -43,16 +43,16 @@
 .form-section select,
 .form-section textarea {
   width: 100%;
-  padding: 12px;  /* Reduced padding */
+  padding: 12px;  
   border: 3px solid #ccc;
   border-radius: 25px;
-  font-size: 12px;  /* Slightly smaller font size */
+  font-size: 12px;  
   color: #333;
   margin-bottom: 15px;
   margin-top: 5px;
   box-sizing: border-box;
   display: block;
-  height: 45px;  /* Reduced height */
+  height: 60px;  
   background-color: #fff;
   transition: border-color 0.3s ease;
 }
@@ -66,22 +66,22 @@
   background-size: 1.5em !important;  
   padding-right: 50px !important; 
   padding: 20px !important; 
-  font-size: 1.6rem !important;  
+  font-size: 0.7rem !important;  
   height: 60px !important;  
   width: 100% !important;  
-  border: 2px solid #ccc !important; 
-  border-radius: 8px !important; 
+  border: 3px solid #ccc !important; 
+  border-radius: 25px !important; 
   box-sizing: border-box !important; 
   transition: border-color 0.3s ease !important;  
 }
 
 .styled-select:focus {
-  border-color: #18304A;  /* Change border color on focus */
+  border-color: #18304A;  
 }
 
 .styled-select option {
-  font-size: 0.7rem;  /* Larger font size for options */
-  padding: 10px;  /* Increased padding for options */
+  font-size: 0.7rem;  
+  padding: 10px;  
 }
 
 
@@ -90,12 +90,12 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 40px;  /* Reduced margin */
+  margin-top: 40px;  
 }
 
 .form-buttons button {
-  padding: 8px 18px;  /* Reduced padding */
-  font-size: 16px;  /* Slightly smaller font size */
+  padding: 8px 18px; 
+  font-size: 16px;  
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -119,4 +119,10 @@
   border: none;
   color: #aaa;
   cursor: pointer;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 4px;
 }
