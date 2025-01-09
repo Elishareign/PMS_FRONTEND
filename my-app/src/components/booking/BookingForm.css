@@ -59,7 +59,7 @@
   }
   
   .step.active .circle {
-    background-color: #4caf50; /* Active step color */
+    background-color: #18304A; /* Active step color */
   }
   
   .step p {
@@ -80,7 +80,7 @@
     cursor: pointer;
     border: none;
     border-radius: 4px;
-    background-color: #4caf50;
+    background-color: #18304A;
     color: white;
   }
   

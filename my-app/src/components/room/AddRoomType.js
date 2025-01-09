@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AddRoomType.css";
 
 const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
+  const [currentStep, setCurrentStep] = useState(1);
   const [roomTypeName, setRoomTypeName] = useState("");
   const [basePrice, setBasePrice] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -25,8 +26,14 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     restaurant: false,
     spa: false,
   });
-  const [imageFile, setImageFile] = useState(null);
-  const [errors, setErrors] = useState({});
+
+  const [errors, setErrors] = useState({
+    roomTypeName: "",
+    basePrice: "",
+    capacity: "",
+    roomSize: "",
+    description: "",
+  });
 
   const amenitiesList = [
     { name: "wifi", label: "WiFi" },
@@ -48,226 +55,224 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     { name: "spa", label: "Spa" },
   ];
 
-  const handleAmenityChange = (event) => {
-    const { name, checked } = event.target;
-    setAmenities((prevAmenities) => ({
-      ...prevAmenities,
-      [name]: checked,
-    }));
-  };
-
-  const handleFacilityChange = (event) => {
-    const { name, checked } = event.target;
-    setFacilities((prevFacilities) => ({
-      ...prevFacilities,
-      [name]: checked,
-    }));
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    
-    if (file && allowedTypes.includes(file.type)) {
-      setImageFile(file);
-      console.log("Image selected:", file);
-    } else {
-      alert("Please select a valid image file (JPEG, PNG, or GIF).");
+  const handleCheckboxChange = (e, type) => {
+    const { name, checked } = e.target;
+    if (type === "amenities") {
+      setAmenities((prevState) => ({
+        ...prevState,
+        [name]: checked,
+      }));
+    } else if (type === "facilities") {
+      setFacilities((prevState) => ({
+        ...prevState,
+        [name]: checked,
+      }));
     }
   };
-  
+
+  const handleNextStep = () => setCurrentStep((prevStep) => prevStep + 1);
+  const handlePreviousStep = () => setCurrentStep((prevStep) => prevStep - 1);
+
   const validateForm = () => {
+    let isValid = true;
     const newErrors = {};
-  
-    // Validate RoomTypeName (Allow any text including numbers, special characters)
-    if (!roomTypeName || typeof roomTypeName !== "string" || roomTypeName.trim() === "") {
-      newErrors.roomTypeName = "Room type name is required.";
+
+    // Room Type Name: must start with a letter
+    if (!/^[A-Za-z]/.test(roomTypeName)) {
+      newErrors.roomTypeName = "Room Type Name must start with a letter";
+      isValid = false;
     }
-  
-    // Validate BasePrice (must be a positive number)
-    const priceRegex = /^\d+(\.\d{1,2})?$/; // Regular expression for valid monetary value (e.g., 100, 100.50)
-    if (!basePrice || !priceRegex.test(basePrice)) {
-      newErrors.basePrice = "Base price must be a valid monetary value (e.g., 100, 100.50).";
+
+    // Base Price: must be a valid number and money format
+    if (!/^\d+(\.\d{1,2})?$/.test(basePrice)) {
+      newErrors.basePrice = "Base Price must be a valid money amount";
+      isValid = false;
     }
-  
-    // Validate Capacity (must be an integer)
-    if (!capacity || !Number.isInteger(Number(capacity)) || capacity <= 0) {
-      newErrors.capacity = "Capacity must be a positive integer.";
+
+    // Capacity: must be a number and 3 digits max
+    if (!/^\d{1,3}$/.test(capacity)) {
+      newErrors.capacity = "Capacity must be a number with up to 3 digits";
+      isValid = false;
     }
-  
-    // Validate RoomSize (must be a valid integer with measurement unit)
-    const sizeRegex = /^\d+(\.\d+)?\s*(sqft|m²)$/i; // Regular expression for room size with a measurement unit (sqft or m²)
-    if (!roomSize || !sizeRegex.test(roomSize.trim())) {
-      newErrors.roomSize = "Room size must be a valid number with measurement (e.g., 200 sqft, 50 m²).";
+
+    // Room Size: must follow a valid room size format (e.g., "20m²", "200 sqft")
+    if (!/^\d+(\.\d+)?\s?(m²|sqft)?$/.test(roomSize)) {
+      newErrors.roomSize = "Room Size must be a valid room measurement (e.g., '20m²')";
+      isValid = false;
     }
-  
-    // Validate Description (Allow any text)
-    if (!description || typeof description !== "string" || description.trim() === "") {
-      newErrors.description = "Description is required.";
+
+    // Description: cannot be empty
+    if (description.trim() === "") {
+      newErrors.description = "Description is required";
+      isValid = false;
     }
-  
-    return newErrors;
+
+    setErrors(newErrors);
+    return isValid;
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
+    if (validateForm()) {
+      const roomTypeData = {
+        roomTypeName,
+        basePrice,
+        capacity,
+        roomSize,
+        description,
+        amenities,
+        facilities,
+      };
+
+      console.log("Room Type Data:", roomTypeData);
+      onSubmit(roomTypeData);
+      onClose();
     }
-
-    const roomTypeData = {
-      roomTypeName,
-      basePrice,
-      capacity,
-      roomSize,
-      description,
-      amenities,
-      facilities,
-      imageFile,
-    };
-
-    console.log("Room Type Data:", roomTypeData);
-    
-    // Call the onSubmit callback passed as a prop to notify the parent component
-    onSubmit(roomTypeData);
-
-    // Close the modal after submission
-    onClose();
   };
-  
+
   if (!isOpen) return null;
 
   return (
     <div className="add-room-type-modal-overlay">
       <div className="add-room-type-modal">
         <h2>Add Room Type</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group1">
-            <label>Upload Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </div>
-          <div className="form-group1">
-            <label>
-              Room Type Name<span className="required-asterisk">*</span>
-            </label>
-            <input
-              type="text"
-              value={roomTypeName}
-              onChange={(e) => setRoomTypeName(e.target.value)}
-              className={errors.roomTypeName ? "input-error" : ""}
-              required
-            />
-            {errors.roomTypeName && (
-              <p className="error-message">{errors.roomTypeName}</p>
-            )}
-          </div>
-          <div className="form-group1">
-            <label>
-              Base Price<span className="required-asterisk">*</span>
-            </label>
-            <input
-              type="number"
-              value={basePrice}
-              onChange={(e) => setBasePrice(e.target.value)}
-              className={errors.basePrice ? "input-error" : ""}
-              required
-            />
-            {errors.basePrice && (
-              <p className="error-message">{errors.basePrice}</p>
-            )}
-          </div>
-          <div className="form-group1">
-            <label>
-              Capacity<span className="required-asterisk">*</span>
-            </label>
-            <input
-              type="number"
-              value={capacity}
-              onChange={(e) => setCapacity(e.target.value)}
-              className={errors.capacity ? "input-error" : ""}
-              required
-            />
-            {errors.capacity && (
-              <p className="error-message">{errors.capacity}</p>
-            )}
-          </div>
-          <div className="form-group1">
-            <label>
-              Room Size<span className="required-asterisk">*</span>
-            </label>
-            <input
-              type="text"
-              value={roomSize}
-              onChange={(e) => setRoomSize(e.target.value)}
-              className={errors.roomSize ? "input-error" : ""}
-              required
-            />
-            {errors.roomSize && (
-              <p className="error-message">{errors.roomSize}</p>
-            )}
-          </div>
-          <div className="form-group1">
-            <label>Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className={`description-textarea ${errors.description ? "input-error" : ""}`}
-            ></textarea>
-            {errors.description && (
-              <p className="error-message">{errors.description}</p>
-            )}
-          </div>
 
-          <div className="form-group2">
-            <label>Additional Amenities:</label>
-            <div className="amenities-list">
-              {amenitiesList.map((amenity) => (
-                <div key={amenity.name} className="amenity-item">
-                  <input
-                    type="checkbox"
-                    name={amenity.name}
-                    checked={amenities[amenity.name]}
-                    onChange={handleAmenityChange}
-                    id={amenity.name}
-                  />
-                  <label htmlFor={amenity.name}>{amenity.label}</label>
-                </div>
-              ))}
+        {/* Stepper Header */}
+        <div className="add-room-type-stepper">
+          {["Room Details", "Amenities Included", "Facilities Included"].map((title, index) => {
+            const isCompleted = index + 1 < currentStep;
+            const isActive = index + 1 === currentStep;
+
+            return (
+              <div
+                key={index}
+                className={`step ${isActive ? "active" : ""} ${isCompleted ? "completed" : ""}`}
+              >
+                <div className="circle">{index + 1}</div>
+                <span>{title}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Form Content */}
+        <form onSubmit={handleSubmit}>
+          {currentStep === 1 && (
+            <div className="form-step">
+              <div className="form-group">
+                <label>Room Type Name</label>
+                <input
+                  type="text"
+                  value={roomTypeName}
+                  onChange={(e) => setRoomTypeName(e.target.value)}
+                  required
+                />
+                {errors.roomTypeName && <span className="error">{errors.roomTypeName}</span>}
+              </div>
+              <div className="form-group">
+                <label>Base Price</label>
+                <input
+                  type="number"
+                  value={basePrice}
+                  onChange={(e) => setBasePrice(e.target.value)}
+                  required
+                />
+                {errors.basePrice && <span className="error">{errors.basePrice}</span>}
+              </div>
+              <div className="form-group">
+                <label>Capacity</label>
+                <input
+                  type="number"
+                  value={capacity}
+                  onChange={(e) => setCapacity(e.target.value)}
+                  required
+                />
+                {errors.capacity && <span className="error">{errors.capacity}</span>}
+              </div>
+              <div className="form-group">
+                <label>Room Size</label>
+                <input
+                  type="text"
+                  value={roomSize}
+                  onChange={(e) => setRoomSize(e.target.value)}
+                  required
+                />
+                {errors.roomSize && <span className="error">{errors.roomSize}</span>}
+              </div>
+              <div className="form-group">
+                <label>Description</label>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                {errors.description && <span className="error">{errors.description}</span>}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 2 && (
+            <div className="form-step">
+              <label>Amenities Included:</label>
+              <div className="checkbox-group">
+                {amenitiesList.map((amenity) => (
+                  <div key={amenity.name} className="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name={amenity.name}
+                      checked={amenities[amenity.name]}
+                      onChange={(e) => handleCheckboxChange(e, "amenities")}
+                    />
+                    <label>{amenity.label}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 3 && (
+            <div className="form-step">
+              <label>Facilities Included:</label>
+              <div className="checkbox-group">
+                {facilitiesList.map((facility) => (
+                  <div key={facility.name} className="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name={facility.name}
+                      checked={facilities[facility.name]}
+                      onChange={(e) => handleCheckboxChange(e, "facilities")}
+                    />
+                    <label>{facility.label}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Buttons */}
+          <div className="navigation-buttons">
+            <div className="left-buttons">
+              {currentStep > 1 && (
+                <button type="button" className="back-btn" onClick={handlePreviousStep}>
+                  Back
+                </button>
+              )}
+            </div>
+            <div className="right-buttons">
+              {currentStep < 3 && (
+                <button type="button" className="next-btn" onClick={handleNextStep}>
+                  Next
+                </button>
+              )}
+              {currentStep === 3 && (
+                <button type="submit" className="submit-btn">
+                  Submit
+                </button>
+              )}
+              <button type="button" className="cancel-btn" onClick={onClose}>
+                Cancel
+              </button>
             </div>
           </div>
-          <div className="form-group2">
-            <label>Additional Facilities:</label>
-            <div className="facilities-list">
-              {facilitiesList.map((facility) => (
-                <div key={facility.name} className="facility-item">
-                  <input
-                    type="checkbox"
-                    name={facility.name}
-                    checked={facilities[facility.name]}
-                    onChange={handleFacilityChange}
-                    id={facility.name}
-                  />
-                  <label htmlFor={facility.name}>{facility.label}</label>
-                </div>
-              ))}
-            </div>
-          </div>
-          <button type="submit" className="confirm-btn">
-            Submit
-          </button>
-          <button
-              type="button"
-              className="cancel-btn"
-              onClick={onClose}
-            >
-              Cancel
-         </button>
         </form>
       </div>
     </div>

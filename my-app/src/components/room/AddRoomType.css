@@ -1,3 +1,11 @@
+/* Global box-sizing to manage dimensions */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
 .add-room-type-modal-overlay {
   display: flex;
   justify-content: center;
@@ -9,18 +17,20 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  overflow: hidden;
 }
 
 .add-room-type-modal {
   background: #fff;
   border-radius: 10px;
   padding: 40px;
-  max-width: 90%;   
-  max-height: 90%;  
+  max-width: 90%;
+  max-height: 90%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
-  overflow: auto;
-  width: 900px;     
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  width: 900px; 
 }
 
 .add-room-type-modal h2 {
@@ -30,65 +40,64 @@
   font-weight: 800;
 }
 
+.form-step label {
+  font-size: 20px;
+  font-weight: 600;
+  color: #18304A;
+}
 
 .form-group {
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  font-size: 18px;
 }
 
 .add-room-type-modal input, textarea, select {
   width: 100%;
-  padding: 15px;
-  border: 2px solid #ccc;
+  padding: 12px;  
+  border: 2.2px solid #ccc;
   border-radius: 25px;
-  font-size: 18px;
+  font-size: 14px;  
   color: #333;
   margin-bottom: 15px;
   margin-top: 5px;
   box-sizing: border-box;
-  height: 50px;
+  display: block;
+  height: 50px;  
   background-color: #fff;
   transition: border-color 0.3s ease;
 }
 
-.button-group {
+.checkbox-group {
   display: flex;
-  justify-content: center; 
-  gap: 10px; 
+  flex-direction: column;
   margin-top: 20px;
 }
-button.confirm-btn {
-  background: #18304A;
-  color: white;
-  border: none;
-  padding: 10px 20px;
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-right: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 7px;
+  border: 2.5px solid #ccc;
   cursor: pointer;
-  border-radius: 4px;
-  
 }
 
-button.confirm-btn:hover {
-  background-color: #0056b3;
+.checkbox-item label {
+  font-size: 18px;
+  border-color: #18304A;  
+  font-weight: 600;
 }
 
-.cancel-btn {
-  background-color: #ccc;
- color: #18304A;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button.confirm-btn, .cancel-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-}
 
 .amenities-list, .facilities-list {
   display: flex;
@@ -131,22 +140,12 @@ input[type="checkbox"]:checked::before {
   font-size: 16px;
 }
 
-label {
-  font-size: 14px;
-  cursor: pointer;
-}
+
 
 input[type="checkbox"]:checked + label {
   color: #18304A;
 }
 
-
-.form-group1 label {
-  font-size: 18px;
-  font-weight: 600;
-  color: #18304A;
-  margin-top: 30px;
-}
 
 .description-textarea {
   width: 100%;
@@ -177,4 +176,142 @@ input[type="checkbox"]:checked + label {
   color: red;
   font-size: 0.875rem;
   margin-top: 0.5rem;
+}
+
+
+.add-room-type-stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensures the items are vertically aligned */
+  margin-bottom: 20px;
+}
+
+
+.step {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative; /* To position the line relative to each step */
+}
+
+.step .circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.step.completed .circle {
+  background-color: #18304A !important;
+}
+
+.step {
+  position: relative;
+  z-index: 2; /* Higher z-index to ensure it's on top of the lines */
+}
+
+.step::after {
+  z-index: 1; /* Lower z-index to ensure lines are behind the circles */
+}
+
+
+.step.active .circle {
+  background-color: #18304A !important;
+}
+
+.step span {
+  font-size: 14px;
+  color: gray;
+}
+
+.step.active span {
+  color: #18304A;
+}
+
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 65%; 
+  width: 334px; 
+  height: 1px; 
+  background-color: #18304A;
+  z-index: -1;
+}
+
+
+
+.step.active:not(:last-child)::after {
+  background-color: #18304A !important;
+}
+
+.step.completed:not(:last-child)::after {
+  background-color: #18304A !important;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-buttons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Style for the back button */
+.left-buttons button {
+  background-color: lightgray;  /* Set light gray background */
+  border: none;                 /* Remove border */
+  padding: 10px 20px;           /* Add padding for better look */
+  font-size: 16px;              /* Set font size */
+  cursor: pointer;             /* Show pointer cursor */
+  border-radius: 5px;           /* Optional: Rounded corners */
+}
+
+.right-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navigation-buttons button.next-btn {
+  background-color: #18304A;
+  color: #fff;
+}
+
+.navigation-buttons button.back-btn {
+  background-color: #fffcfc;  
+  border-color: black; 
+  font-weight: 600;               
+}
+
+.navigation-buttons button {
+  padding: 14px 26px; 
+  font-size: 18px;  
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigation-buttons button.cancel-btn {
+  background-color: #ccc; 
+  color: black;
+}
+
+.navigation-buttons button.cancel-btn:hover {
+  background-color: #b3b3b3; 
+}
+
+span {
+  font-size: 14px;
 }

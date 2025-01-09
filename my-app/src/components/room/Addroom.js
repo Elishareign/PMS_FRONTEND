@@ -3,8 +3,6 @@ import "./AddRoom.css";
 
 const AddRoom = ({ isOpen, onClose, onSubmit }) => {
   const [selectedRoomType, setSelectedRoomType] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({
     roomNumber: "",
@@ -29,18 +27,40 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
     { id: 3, room_type_name: "Suite" },
   ];
 
+  const roomStatusOptions = [
+    { value: "", label: "Select Status", disabled: true },
+    { value: "Available", label: "Available" },
+    { value: "Maintenance", label: "Maintenance" },
+    { value: "Out-of-Order", label: "Out of Order" },
+  ];
+
+
   const validateFields = () => {
     const fieldErrors = {};
-    if (!roomNumber) fieldErrors.roomNumber = "Room Number is required.";
-    else if (isNaN(roomNumber)) fieldErrors.roomNumber = "Must be a valid number.";
-    else if (roomNumber.length > 4) fieldErrors.roomNumber = "Must not exceed 4 digits.";
 
-    if (!floorNumber) fieldErrors.floorNumber = "Floor Number is required.";
-    else if (isNaN(floorNumber)) fieldErrors.floorNumber = "Must be a valid number.";
-    else if (floorNumber.length > 3) fieldErrors.floorNumber = "Must not exceed 3 digits.";
+    if (!roomNumber) {
+      fieldErrors.roomNumber = "Room Number is required.";
+    } else if (isNaN(roomNumber)) {
+      fieldErrors.roomNumber = "Must be a valid number.";
+    } else if (roomNumber.length > 4) {
+      fieldErrors.roomNumber = "Must not exceed 4 digits.";
+    }
 
-    if (!selectedRoomType) fieldErrors.roomType = "Room Type is required.";
-    if (!roomStatus) fieldErrors.roomStatus = "Room Status is required.";
+    if (!floorNumber) {
+      fieldErrors.floorNumber = "Floor Number is required.";
+    } else if (isNaN(floorNumber)) {
+      fieldErrors.floorNumber = "Must be a valid number.";
+    } else if (floorNumber.length > 3) {
+      fieldErrors.floorNumber = "Must not exceed 3 digits.";
+    }
+
+    if (!selectedRoomType) {
+      fieldErrors.roomType = "Room Type is required.";
+    }
+
+    if (!roomStatus) {
+      fieldErrors.roomStatus = "Room Status is required.";
+    }
 
     setErrors(fieldErrors);
 
@@ -49,24 +69,25 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
       return false;
     }
 
-    setGeneralError(""); // Clear general error if no issues
+    setGeneralError("");
     return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validateFields()) return;
-
+    
+    // Trigger validation on submit
+    const isValid = validateFields();
+    if (!isValid) return; // Only proceed if validation passes
+  
+    setIsSubmitting(true);
     const roomData = { roomNumber, floorNumber, roomType: selectedRoomType, roomStatus };
+  
+    // Call the onSubmit function passed via props
     onSubmit(roomData);
+    setIsSubmitting(false);
+    onClose();
   };
-
-  const roomStatusOptions = [
-    { value: "", label: "Select Status", disabled: true },
-    { value: "Available", label: "Available" },
-    { value: "Maintenance", label: "Maintenance" },
-    { value: "Out-of-Order", label: "Out of Order" },
-  ];
 
   const handleInputChange = (e, field) => {
     const value = e.target.value;
@@ -92,7 +113,7 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
   const getBorderColor = (field) => {
     if (formValidity[field] === "invalid") return "red";
     if (formValidity[field] === "valid") return "green";
-    return "#ccc"; // Default grey color
+    return "#ccc"; 
   };
 
   if (!isOpen) return null;
@@ -184,11 +205,11 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
             {generalError && <p className="error-text general-error">{generalError}</p>}
 
             <div className="form-buttons">
-              <button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Saving..." : "Save"}
-              </button>
               <button type="button" onClick={onClose}>
                 Cancel
+              </button>
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Saving..." : "Add Room"}
               </button>
             </div>
           </div>
