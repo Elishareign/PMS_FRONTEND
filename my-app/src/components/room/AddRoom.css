@@ -14,9 +14,9 @@
 .modal-content {
   background: #fff;
   border-radius: 10px;
-  padding: 20px;  /* Reduced padding */
-  max-width: 600px;  /* Smaller width */
-  max-height: 80%;   /* Limit max height */
+  padding: 20px;  
+  max-width: 600px; 
+  max-height: 80%;   
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: auto;
@@ -24,19 +24,23 @@
 
 .modal-content h2 {
   margin-top: 30px;
-  font-size: 24px;  /* Slightly smaller font size */
+  font-size: 30px;  
   color: #18304A;
   font-weight: 800;
 }
 
 .form-section h1 {
-  font-size: 18px;  /* Slightly smaller font size */
+  font-size: 22px;  
   margin-bottom: 30px;
 }
 
 .form-section {
-  margin-top: 30px;
-  margin-bottom: 25px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.form-section label {
+  font-size: 18px;
 }
 
 .form-section input,
@@ -46,7 +50,7 @@
   padding: 12px;  
   border: 3px solid #ccc;
   border-radius: 25px;
-  font-size: 12px;  
+  font-size: 14px;  
   color: #333;
   margin-bottom: 15px;
   margin-top: 5px;
@@ -66,7 +70,7 @@
   background-size: 1.5em !important;  
   padding-right: 50px !important; 
   padding: 20px !important; 
-  font-size: 0.7rem !important;  
+  font-size: 13px !important;  
   height: 60px !important;  
   width: 100% !important;  
   border: 3px solid #ccc !important; 
@@ -85,19 +89,18 @@
 }
 
 
-
 .form-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 40px;  
+  gap: 15px;
+  margin-top: 10px;  
 }
 
 .form-buttons button {
-  padding: 8px 18px; 
-  font-size: 16px;  
+  padding: 14px 26px; 
+  font-size: 18px;  
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   cursor: pointer;
 }
 
@@ -124,5 +127,7 @@
 .error-text {
   color: red;
   font-size: 0.875rem;
-  margin-top: 4px;
+  margin-top: 2px;
 }
+
+

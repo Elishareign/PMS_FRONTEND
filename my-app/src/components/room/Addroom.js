@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import "./AddRoom.css";
 
 const AddRoom = ({ isOpen, onClose, onSubmit }) => {
-  const [selectedRoomType, setSelectedRoomType] = useState(""); 
-  const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState(""); 
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [selectedRoomType, setSelectedRoomType] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({
     roomNumber: "",
     floorNumber: "",
     roomType: "",
     roomStatus: "",
   });
-
 
   const [roomNumber, setRoomNumber] = useState("");
   const [floorNumber, setFloorNumber] = useState("");
@@ -21,6 +20,8 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
     roomNumber: "default",
     floorNumber: "default",
   });
+
+  const [generalError, setGeneralError] = useState("");
 
   const roomTypes = [
     { id: 1, room_type_name: "Standard Room" },
@@ -42,7 +43,14 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
     if (!roomStatus) fieldErrors.roomStatus = "Room Status is required.";
 
     setErrors(fieldErrors);
-    return Object.keys(fieldErrors).length === 0;
+
+    if (Object.keys(fieldErrors).length > 0) {
+      setGeneralError("Please fill in all the required fields.");
+      return false;
+    }
+
+    setGeneralError(""); // Clear general error if no issues
+    return true;
   };
 
   const handleSubmit = (e) => {
@@ -110,9 +118,9 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) => handleInputChange(e, "roomNumber")}
                   style={{ borderColor: getBorderColor("roomNumber") }}
                   required
-                  min="1" 
+                  min="1"
                 />
-                 {errors.roomNumber && <p className="error-text">{errors.roomNumber}</p>}
+                {errors.roomNumber && <p className="error-text">{errors.roomNumber}</p>}
 
                 <label htmlFor="floorNumber">
                   Floor Number <span className="required">*</span>
@@ -125,9 +133,9 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) => handleInputChange(e, "floorNumber")}
                   style={{ borderColor: getBorderColor("floorNumber") }}
                   required
-                  min="1" 
+                  min="1"
                 />
-                  {errors.floorNumber && <p className="error-text">{errors.floorNumber}</p>}
+                {errors.floorNumber && <p className="error-text">{errors.floorNumber}</p>}
 
                 <label htmlFor="roomType">
                   Room Type <span className="required">*</span>
@@ -140,7 +148,9 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) => setSelectedRoomType(e.target.value)}
                   required
                 >
-                  <option value="" disabled>Select Room Type</option>
+                  <option value="" disabled>
+                    Select Room Type
+                  </option>
                   {roomTypes.map((roomType) => (
                     <option key={roomType.id} value={roomType.id}>
                       {roomType.room_type_name}
@@ -148,7 +158,6 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
                   ))}
                 </select>
                 {errors.roomType && <p className="error-text">{errors.roomType}</p>}
-
 
                 <label htmlFor="roomStatus">
                   Room Status <span className="required">*</span>
@@ -171,11 +180,16 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
               </div>
             </div>
 
+            {/* General Error Message */}
+            {generalError && <p className="error-text general-error">{generalError}</p>}
+
             <div className="form-buttons">
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Saving..." : "Save"}
               </button>
-              <button type="button" onClick={onClose}>Cancel</button>
+              <button type="button" onClick={onClose}>
+                Cancel
+              </button>
             </div>
           </div>
         </form>

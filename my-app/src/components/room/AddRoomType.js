@@ -142,9 +142,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
   return (
     <div className="add-room-type-modal-overlay">
       <div className="add-room-type-modal">
-        <button className="close-btn" onClick={onClose}>
-          ×
-        </button>
         <h2>Add Room Type</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group1">
@@ -264,6 +261,13 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
           <button type="submit" className="confirm-btn">
             Submit
           </button>
+          <button
+              type="button"
+              className="cancel-btn"
+              onClick={onClose}
+            >
+              Cancel
+         </button>
         </form>
       </div>
     </div>

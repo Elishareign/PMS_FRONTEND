@@ -67,15 +67,16 @@ const Room = () => {
   const handleEndDateChange = (e) => setEndDate(e.target.value);
 
   const handleAddRoom = (roomData) => {
-    if (!roomData.roomNumber || !roomData.floorNumber || !roomData.roomType || !roomData.roomStatus) {
-      console.error('Missing required room data');
-      alert('Please fill all the room data fields.');
-      return;
-    }
-
-    setRooms((prevRooms) => [...prevRooms, roomData]);
+    const newRoom = {
+      id: String(rooms.length + 1).padStart(5, "0"),
+      type: roomData.roomType,
+      floor: roomData.floorNumber,
+      status: roomData.roomStatus,
+      lastUpdated: new Date().toISOString().split("T")[0], // Today's date
+    };
+    setRooms((prevRooms) => [...prevRooms, newRoom]);
     setIsAddRoomOpen(false);
-    alert('Room added successfully');
+    alert("Room added successfully!");
   };
 
   const handleEditRoom = (roomId) => {
