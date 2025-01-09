@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./AddRoomType.css";
 
 const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(1); // Step management
   const [roomTypeName, setRoomTypeName] = useState("");
   const [basePrice, setBasePrice] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -25,14 +25,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     conferenceRoom: false,
     restaurant: false,
     spa: false,
-  });
-
-  const [errors, setErrors] = useState({
-    roomTypeName: "",
-    basePrice: "",
-    capacity: "",
-    roomSize: "",
-    description: "",
   });
 
   const amenitiesList = [
@@ -73,61 +65,21 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
   const handleNextStep = () => setCurrentStep((prevStep) => prevStep + 1);
   const handlePreviousStep = () => setCurrentStep((prevStep) => prevStep - 1);
 
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = {};
-
-    // Room Type Name: must start with a letter
-    if (!/^[A-Za-z]/.test(roomTypeName)) {
-      newErrors.roomTypeName = "Room Type Name must start with a letter";
-      isValid = false;
-    }
-
-    // Base Price: must be a valid number and money format
-    if (!/^\d+(\.\d{1,2})?$/.test(basePrice)) {
-      newErrors.basePrice = "Base Price must be a valid money amount";
-      isValid = false;
-    }
-
-    // Capacity: must be a number and 3 digits max
-    if (!/^\d{1,3}$/.test(capacity)) {
-      newErrors.capacity = "Capacity must be a number with up to 3 digits";
-      isValid = false;
-    }
-
-    // Room Size: must follow a valid room size format (e.g., "20m²", "200 sqft")
-    if (!/^\d+(\.\d+)?\s?(m²|sqft)?$/.test(roomSize)) {
-      newErrors.roomSize = "Room Size must be a valid room measurement (e.g., '20m²')";
-      isValid = false;
-    }
-
-    // Description: cannot be empty
-    if (description.trim() === "") {
-      newErrors.description = "Description is required";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      const roomTypeData = {
-        roomTypeName,
-        basePrice,
-        capacity,
-        roomSize,
-        description,
-        amenities,
-        facilities,
-      };
+    const roomTypeData = {
+      roomTypeName,
+      basePrice,
+      capacity,
+      roomSize,
+      description,
+      amenities,
+      facilities,
+    };
 
-      console.log("Room Type Data:", roomTypeData);
-      onSubmit(roomTypeData);
-      onClose();
-    }
+    console.log("Room Type Data:", roomTypeData);
+    onSubmit(roomTypeData);
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -140,23 +92,27 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
         {/* Stepper Header */}
         <div className="add-room-type-stepper">
           {["Room Details", "Amenities Included", "Facilities Included"].map((title, index) => {
-            const isCompleted = index + 1 < currentStep;
-            const isActive = index + 1 === currentStep;
+            const isCompleted = index + 1 < currentStep; // Determine if the step is completed
+            const isActive = index + 1 === currentStep; // Check if the step is active
 
             return (
               <div
                 key={index}
                 className={`step ${isActive ? "active" : ""} ${isCompleted ? "completed" : ""}`}
               >
-                <div className="circle">{index + 1}</div>
+                <div className="circle">
+                  {index + 1}
+                </div>
                 <span>{title}</span>
               </div>
             );
           })}
         </div>
 
+
+
         {/* Form Content */}
-        <form onSubmit={handleSubmit}>
+        <form>
           {currentStep === 1 && (
             <div className="form-step">
               <div className="form-group">
@@ -167,7 +123,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) => setRoomTypeName(e.target.value)}
                   required
                 />
-                {errors.roomTypeName && <span className="error">{errors.roomTypeName}</span>}
               </div>
               <div className="form-group">
                 <label>Base Price</label>
@@ -177,7 +132,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) => setBasePrice(e.target.value)}
                   required
                 />
-                {errors.basePrice && <span className="error">{errors.basePrice}</span>}
               </div>
               <div className="form-group">
                 <label>Capacity</label>
@@ -187,7 +141,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) => setCapacity(e.target.value)}
                   required
                 />
-                {errors.capacity && <span className="error">{errors.capacity}</span>}
               </div>
               <div className="form-group">
                 <label>Room Size</label>
@@ -197,7 +150,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) => setRoomSize(e.target.value)}
                   required
                 />
-                {errors.roomSize && <span className="error">{errors.roomSize}</span>}
               </div>
               <div className="form-group">
                 <label>Description</label>
@@ -205,7 +157,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
-                {errors.description && <span className="error">{errors.description}</span>}
               </div>
             </div>
           )}
@@ -248,15 +199,16 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
             </div>
           )}
 
+
           {/* Navigation Buttons */}
           <div className="navigation-buttons">
-            <div className="left-buttons">
-              {currentStep > 1 && (
-                <button type="button" className="back-btn" onClick={handlePreviousStep}>
-                  Back
-                </button>
-              )}
-            </div>
+          <div className="left-buttons">
+            {currentStep > 1 && (
+              <button type="button" className="back-btn" onClick={handlePreviousStep}>
+                Back
+              </button>
+            )}
+          </div>
             <div className="right-buttons">
               {currentStep < 3 && (
                 <button type="button" className="next-btn" onClick={handleNextStep}>
@@ -264,7 +216,7 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
                 </button>
               )}
               {currentStep === 3 && (
-                <button type="submit" className="submit-btn">
+                <button type="submit" className="submit-btn" onClick={handleSubmit}>
                   Submit
                 </button>
               )}
@@ -278,5 +230,4 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     </div>
   );
 };
-
 export default AddRoomType;
