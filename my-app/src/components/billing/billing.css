@@ -1,0 +1,137 @@
+.billing-container {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.billing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.billing-header h2 {
+  font-size: 40px;
+  font-weight: 1000;
+  color: #18304A;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.billing-filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.billing-filter-row {
+  display: flex; /* Ensure all filters are in the same row */
+  flex-wrap: wrap; /* Allows filters to wrap to the next line if space is limited */
+  gap: 20px; /* Gap between different filter fields */
+}
+
+.billing-filter-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.billing-filter-dropdown-container,
+.billing-filter-input-container {
+  display: flex;
+  flex-direction: column; /* Align label on top of input/dropdown */
+  width: 200px; /* Adjust width to match design */
+}
+
+.billing-filter-dropdown,
+.billing-filter-input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Ensure dropdowns and inputs take full width */
+}
+
+.billing-filter-input-container {
+  margin-top: 25px;
+}
+
+.billing-reset-button {
+  padding: 10px 20px;
+  background-color: #18304A;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+.billing-reset-button:hover {
+  background-color: #007bff; 
+}
+
+.billing-table {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.billing-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.billing-table th,
+.billing-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.billing-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+
+.view-button {
+  background-color: #007bff; /* Blue */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 12px; 
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.view-button:hover {
+  background-color: #0056b3; 
+}
+
+.archive-button {
+  background-color: #dc3545; 
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 12px; 
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.archive-button:hover {
+  background-color: #c82333;
+}
+
+.billing-reset-button {
+  background-color: #c82333;
+}
+
+
+

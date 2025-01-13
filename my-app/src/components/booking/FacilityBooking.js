@@ -76,18 +76,15 @@ const FacilityBooking = ({ startDate, endDate, paymentFilter }) => {
     return filtered;
   };
 
-  // Memoize filtered bookings to improve performance
   const filteredBookings = useMemo(() => filterFacilityBookings(), [
     startDate, endDate, paymentFilter, activeTab,
   ]);
 
   const handleEdit = (id) => {
-    // Logic for editing the booking (you can redirect or open an edit form)
     alert(`Editing booking ID: ${id}`);
   };
 
   const handleArchive = (id) => {
-    // Logic for archiving the booking (you can mark it as archived, remove from the list, etc.)
     alert(`Archiving booking ID: ${id}`);
   };
 

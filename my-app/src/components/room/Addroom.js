@@ -78,7 +78,7 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
     
     // Trigger validation on submit
     const isValid = validateFields();
-    if (!isValid) return; // Only proceed if validation passes
+    if (!isValid) return;
   
     setIsSubmitting(true);
     const roomData = { roomNumber, floorNumber, roomType: selectedRoomType, roomStatus };
@@ -137,6 +137,7 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
                   id="roomNumber"
                   value={roomNumber}
                   onChange={(e) => handleInputChange(e, "roomNumber")}
+                  placeholder="Enter Room Number" 
                   style={{ borderColor: getBorderColor("roomNumber") }}
                   required
                   min="1"
@@ -152,6 +153,7 @@ const AddRoom = ({ isOpen, onClose, onSubmit }) => {
                   id="floorNumber"
                   value={floorNumber}
                   onChange={(e) => handleInputChange(e, "floorNumber")}
+                  placeholder="Enter Floor Number" 
                   style={{ borderColor: getBorderColor("floorNumber") }}
                   required
                   min="1"

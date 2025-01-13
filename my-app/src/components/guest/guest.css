@@ -8,10 +8,6 @@
   font-size: 40px;
   font-weight: 1000;
   color: #18304A;
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  margin-bottom: 20px;
 }
 
 .filter-row {
@@ -29,7 +25,7 @@
 
 .filter-group label{
   margin-right: 10px;
-  font-size: 20px;
+  font-size: 15px;
   font-family: "Poppins", sans-serif;
 }
 
@@ -78,10 +74,10 @@ label {
   margin-bottom: 5px;
 }
 
-/* Move the search box to the far right */
+
 .filter-group:last-child {
-  margin-left: auto; /* This will push the search box to the far right */
-  width: 250px; /* Make the search box wider if desired */
+  margin-left: auto; 
+  width: 250px; 
 }
 
 

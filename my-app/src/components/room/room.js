@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import AddRoom from "./Addroom"; // Adjust case if needed
-import RoomType from "./RoomType"; // Import the RoomType component
+import AddRoom from "./Addroom"; 
+import RoomType from "./RoomType"; 
 import './room.css';
 
 const Room = () => {
@@ -65,6 +65,14 @@ const Room = () => {
   const handleTypeFilter = (e) => setTypeFilter(e.target.value);
   const handleStartDateChange = (e) => setStartDate(e.target.value);
   const handleEndDateChange = (e) => setEndDate(e.target.value);
+
+  const handleResetFilters = () => {
+    setSearchTerm("");
+    setStatusFilter("");
+    setTypeFilter("");
+    setStartDate("");
+    setEndDate("");
+  };
 
   const handleAddRoom = (roomData) => {
     const newRoom = {
@@ -143,7 +151,7 @@ const Room = () => {
               <h2>Filter By:</h2>
             </div>
 
-            <div className="filter-item">
+            <div className="filter-option">
               <label htmlFor="status-filter">Room Status:</label>
               <select id="status-filter" value={statusFilter} onChange={handleStatusFilter}>
                 <option value="">All</option>
@@ -155,7 +163,7 @@ const Room = () => {
               </select>
             </div>
 
-            <div className="filter-item">
+            <div className="filter-option">
               <label htmlFor="type-filter">Room Type:</label>
               <select id="type-filter" value={typeFilter} onChange={handleTypeFilter}>
                 <option value="">All</option>
@@ -165,7 +173,7 @@ const Room = () => {
               </select>
             </div>
 
-            <div className="filter-item">
+            <div className="filter-option">
               <label htmlFor="date-range">Date Range:</label>
               <div className="date-range-inputs">
                 <input
@@ -193,9 +201,15 @@ const Room = () => {
               />
             </div>
 
-            <button className="add-room-btn" onClick={() => setIsAddRoomOpen(true)}>
-              + Add Room
-            </button>
+            <div className="room-filters-wrapper">
+              <button className="reset-filters-btn" onClick={handleResetFilters}>
+                Reset Filters
+              </button>
+              <button className="add-room-btn" onClick={() => setIsAddRoomOpen(true)}>
+                + Add Room
+              </button>
+            </div>
+
             <AddRoom
               isOpen={isAddRoomOpen}
               onClose={() => setIsAddRoomOpen(false)}

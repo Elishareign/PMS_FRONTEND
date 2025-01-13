@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import "./AddRoomType.css";
 
 const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
-  const [currentStep, setCurrentStep] = useState(1); // Step management
+  const [currentStep, setCurrentStep] = useState(1);
   const [roomTypeName, setRoomTypeName] = useState("");
   const [basePrice, setBasePrice] = useState("");
   const [capacity, setCapacity] = useState("");
   const [roomSize, setRoomSize] = useState("");
   const [description, setDescription] = useState("");
+  const [formErrors, setFormErrors] = useState({
+    roomTypeName: false,
+    basePrice: false,
+    capacity: false,
+    roomSize: false,
+  });
   const [amenities, setAmenities] = useState({
     wifi: false,
     aircon: false,
@@ -27,6 +33,75 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     spa: false,
   });
 
+  // field validation
+  const validateField = (field, value) => {
+    switch (field) {
+      case "roomTypeName":
+        return /^[a-zA-Z][a-zA-Z0-9 ]*$/.test(value);
+      case "basePrice":
+        return /^\d+(\.\d{1,2})?$/.test(value) && parseFloat(value) > 0;
+      case "capacity":
+        return /^\d{1,3}$/.test(value);
+      case "roomSize":
+        return /^\d+(\.\d+)?$/.test(value) && parseFloat(value) > 0;
+      case "description":
+        return value.trim() !== ""; 
+      default:
+        return true;
+    }
+  };
+
+  const handleInputChange = (field, value) => {
+    const isValid = validateField(field, value);
+    setFormErrors((prevState) => ({
+      ...prevState,
+      [field]: !isValid,
+    }));
+
+    // Set the state values for each field
+    switch (field) {
+      case "roomTypeName":
+        setRoomTypeName(value);
+        break;
+      case "basePrice":
+        setBasePrice(value);
+        break;
+      case "capacity":
+        setCapacity(value);
+        break;
+      case "roomSize":
+        setRoomSize(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Input Class logic based on the validation state
+  const inputClass = (field) => {
+    // Check if the value of the field is empty or not
+    const value = {
+      roomTypeName,
+      basePrice,
+      capacity,
+      roomSize,
+      description, 
+    }[field];
+  
+    // If the field is empty, make it gray
+    if (!value) {
+      return "input-default";
+    }
+  
+    // If there's an error, make it red
+    if (formErrors[field]) {
+      return "input-error";
+    }
+  
+    // If input is valid, make it green
+    return "input-valid";
+  };
+  
   const amenitiesList = [
     { name: "wifi", label: "WiFi" },
     { name: "aircon", label: "Air Conditioned Room" },
@@ -46,7 +121,7 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     { name: "restaurant", label: "Restaurant" },
     { name: "spa", label: "Spa" },
   ];
-
+  
   const handleCheckboxChange = (e, type) => {
     const { name, checked } = e.target;
     if (type === "amenities") {
@@ -62,8 +137,23 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     }
   };
 
-  const handleNextStep = () => setCurrentStep((prevStep) => prevStep + 1);
-  const handlePreviousStep = () => setCurrentStep((prevStep) => prevStep - 1);
+  const handleNextStep = () => {
+    const step1Fields = ["roomTypeName", "basePrice", "capacity", "roomSize"];
+    const step1Errors = step1Fields.reduce((errors, field) => {
+      const value = { roomTypeName, basePrice, capacity, roomSize }[field];
+      errors[field] = !validateField(field, value);
+      return errors;
+    }, {});
+
+    setFormErrors((prevState) => ({
+      ...prevState,
+      ...step1Errors,
+    }));
+
+    const hasErrors = Object.values(step1Errors).some((error) => error);
+    if (currentStep === 1 && hasErrors) return;
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,8 +166,6 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
       amenities,
       facilities,
     };
-
-    console.log("Room Type Data:", roomTypeData);
     onSubmit(roomTypeData);
     onClose();
   };
@@ -88,31 +176,24 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
     <div className="add-room-type-modal-overlay">
       <div className="add-room-type-modal">
         <h2>Add Room Type</h2>
-
-        {/* Stepper Header */}
         <div className="add-room-type-stepper">
           {["Room Details", "Amenities Included", "Facilities Included"].map((title, index) => {
-            const isCompleted = index + 1 < currentStep; // Determine if the step is completed
-            const isActive = index + 1 === currentStep; // Check if the step is active
+            const isCompleted = index + 1 < currentStep;
+            const isActive = index + 1 === currentStep;
 
             return (
               <div
                 key={index}
                 className={`step ${isActive ? "active" : ""} ${isCompleted ? "completed" : ""}`}
               >
-                <div className="circle">
-                  {index + 1}
-                </div>
+                <div className="circle">{index + 1}</div>
                 <span>{title}</span>
               </div>
             );
           })}
         </div>
 
-
-
-        {/* Form Content */}
-        <form>
+        <form onSubmit={handleSubmit}>
           {currentStep === 1 && (
             <div className="form-step">
               <div className="form-group">
@@ -120,42 +201,52 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
                 <input
                   type="text"
                   value={roomTypeName}
-                  onChange={(e) => setRoomTypeName(e.target.value)}
-                  required
+                  onChange={(e) => handleInputChange("roomTypeName", e.target.value)}
+                  placeholder="Enter Room Type Name"
+                  className={inputClass("roomTypeName")}
                 />
               </div>
               <div className="form-group">
                 <label>Base Price</label>
                 <input
-                  type="number"
+                  type="text"
                   value={basePrice}
-                  onChange={(e) => setBasePrice(e.target.value)}
-                  required
+                  onChange={(e) => handleInputChange("basePrice", e.target.value)}
+                  placeholder="Enter Base Price"
+                  className={inputClass("basePrice")}
                 />
               </div>
               <div className="form-group">
                 <label>Capacity</label>
                 <input
-                  type="number"
+                  type="text"
                   value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
-                  required
+                  onChange={(e) => handleInputChange("capacity", e.target.value)}
+                  placeholder="Enter Capacity"
+                  className={inputClass("capacity")}
                 />
               </div>
               <div className="form-group">
-                <label>Room Size</label>
+                <label>Room Size (in square meters)</label>
                 <input
                   type="text"
                   value={roomSize}
-                  onChange={(e) => setRoomSize(e.target.value)}
-                  required
+                  onChange={(e) => handleInputChange("roomSize", e.target.value)}
+                  placeholder="Enter size in square meters (e.g., 25)"
+                  className={inputClass("roomSize")}
                 />
               </div>
               <div className="form-group">
                 <label>Description</label>
                 <textarea
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setDescription(value);
+                    handleInputChange("description", value); 
+                  }}
+                  placeholder="Enter Description" 
+                  className={inputClass("description")} 
                 />
               </div>
             </div>
@@ -199,35 +290,30 @@ const AddRoomType = ({ isOpen, onClose, onSubmit }) => {
             </div>
           )}
 
-
-          {/* Navigation Buttons */}
           <div className="navigation-buttons">
-          <div className="left-buttons">
             {currentStep > 1 && (
-              <button type="button" className="back-btn" onClick={handlePreviousStep}>
+              <button type="button" className="back-btn" onClick={() => setCurrentStep((s) => s - 1)}>
                 Back
               </button>
             )}
-          </div>
-            <div className="right-buttons">
-              {currentStep < 3 && (
-                <button type="button" className="next-btn" onClick={handleNextStep}>
-                  Next
-                </button>
-              )}
-              {currentStep === 3 && (
-                <button type="submit" className="submit-btn" onClick={handleSubmit}>
-                  Submit
-                </button>
-              )}
-              <button type="button" className="cancel-btn" onClick={onClose}>
-                Cancel
+            <button type="button" onClick={onClose} className="cancel-btn">
+              Cancel
+            </button>
+            {currentStep < 3 && (
+              <button type="button" className="next-btn" onClick={handleNextStep}>
+                Next
               </button>
-            </div>
+            )}
+            {currentStep === 3 && (
+              <button type="submit" className="submit-btn">
+                Add Room Type
+              </button>
+            )}
           </div>
         </form>
       </div>
     </div>
   );
 };
+
 export default AddRoomType;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from './facilitiesModal'; // Importing the Modal component
+import Modal from './facilitiesModal';
 import './modal.css';
 import './facilities.css';
 

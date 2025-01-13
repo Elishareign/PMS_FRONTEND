@@ -39,13 +39,18 @@ const Facilities = () => {
     const { name, value } = e.target;
     setFilters({ ...filters, [name]: value });
   };
-  const handleResetFilters = () =>
+
+  const handleResetFilters = () => {
+    // Reset filters and search query
     setFilters({
       facilityType: "All",
       availability: "All",
       price: "All",
       location: "All",
     });
+    setSearchQuery(""); // Clear the search query
+  };
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
@@ -59,10 +64,11 @@ const Facilities = () => {
       </div>
       <FilterBar
         options={filterOptions}
+        filters={filters} // Pass filters down here
+        searchQuery={searchQuery} // Pass search query down here
         handleFilterChange={handleFilterChange}
         handleResetFilters={handleResetFilters}
         handleSearchChange={handleSearchChange}
-        searchQuery={searchQuery}
         handleOpenModal={handleOpenModal}
       />
       <Table data={filteredData} />
@@ -76,6 +82,7 @@ const Facilities = () => {
 
 const FilterBar = ({
   options,
+  filters,
   handleFilterChange,
   handleResetFilters,
   handleSearchChange,
@@ -97,6 +104,7 @@ const FilterBar = ({
             </label>
             <select
               name={key}
+              value={filters[key]} 
               onChange={handleFilterChange}
               className="filter-dropdown"
             >
@@ -116,7 +124,7 @@ const FilterBar = ({
           <input
             type="text"
             placeholder="Search..."
-            value={searchQuery}
+            value={searchQuery} // Ensure search query is cleared
             onChange={handleSearchChange}
             className="search-bar"
           />
@@ -128,8 +136,6 @@ const FilterBar = ({
     </div>
   );
 };
-
-
 
 const Table = ({ data }) => {
   return (

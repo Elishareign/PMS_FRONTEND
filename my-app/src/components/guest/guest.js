@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./guest.css";
 
 const Guest = () => {
-  // Add sample data to the initial state
   const [guestData, setGuestData] = useState([
     {
       id: 1,
@@ -45,29 +44,24 @@ const Guest = () => {
     },
   ]);
 
-  const [filter, setFilter] = useState(""); // State for name search filter
-  const [sortOrder, setSortOrder] = useState("newest"); // State for sorting order
-  const [bookingStatus, setBookingStatus] = useState(""); // State for booking status filter
-  const [platform, setPlatform] = useState(""); // State for platform filter
+  const [filter, setFilter] = useState(""); 
+  const [sortOrder, setSortOrder] = useState("newest"); 
+  const [bookingStatus, setBookingStatus] = useState(""); 
+  const [platform, setPlatform] = useState(""); 
 
-  // Fetch guest data when the component mounts (placeholder for API integration)
+
   useEffect(() => {
     const fetchGuestData = async () => {
       try {
-        // Simulate an API call delay
-        // Uncomment below lines when integrating with an API
-        // const response = await fetch("/api/guests");
-        // const data = await response.json();
-        // setGuestData(data);
       } catch (error) {
         console.error("Error fetching guest data:", error);
       }
     };
 
     fetchGuestData();
-  }, []); // Empty dependency array ensures the effect runs once when the component mounts
+  }, []); 
 
-  // Filter guests based on the filter state
+  // Filter guests 
   const filteredGuests = guestData.filter((guest) => {
     const nameMatch = `${guest.firstName} ${guest.lastName}`
       .toLowerCase()
@@ -81,12 +75,12 @@ const Guest = () => {
     return nameMatch && bookingStatusMatch && platformMatch;
   });
 
-  // Sorting guests based on the selected order (newest to oldest or vice versa)
+  // Sorting guests based on the selected order 
   const sortedGuests = filteredGuests.sort((a, b) => {
     if (sortOrder === "newest") {
-      return new Date(b.bookingDate) - new Date(a.bookingDate); // Sort by booking date descending
+      return new Date(b.bookingDate) - new Date(a.bookingDate); 
     } else {
-      return new Date(a.bookingDate) - new Date(b.bookingDate); // Sort by booking date ascending
+      return new Date(a.bookingDate) - new Date(b.bookingDate); 
     }
   });
 
@@ -145,7 +139,7 @@ const Guest = () => {
           <select
             id="platform"
             value={platform}
-            onChange={(e) => setPlatform(e.target.value)} // Update platform state
+            onChange={(e) => setPlatform(e.target.value)}
           >
             <option value="">All</option>
             <option value="website">Website</option>
@@ -159,9 +153,9 @@ const Guest = () => {
           <input
             id="guest-filter"
             type="text"
-            placeholder="Enter name to filter"
+            placeholder="Search guest name"
             value={filter}
-            onChange={(e) => setFilter(e.target.value)} // Update filter state on input change
+            onChange={(e) => setFilter(e.target.value)} 
           />
         </div>
       </div>

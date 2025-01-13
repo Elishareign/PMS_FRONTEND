@@ -57,19 +57,20 @@
 
 .add-room-type-modal input, textarea, select {
   width: 100%;
-  padding: 12px;  
+  padding: 12px;
   border: 2.2px solid #ccc;
   border-radius: 25px;
-  font-size: 14px;  
+  font-size: 14px;
   color: #333;
   margin-bottom: 15px;
   margin-top: 5px;
   box-sizing: border-box;
   display: block;
-  height: 50px;  
+  height: 50px;
   background-color: #fff;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease; 
 }
+
 
 .checkbox-group {
   display: flex;
@@ -140,12 +141,9 @@ input[type="checkbox"]:checked::before {
   font-size: 16px;
 }
 
-
-
 input[type="checkbox"]:checked + label {
   color: #18304A;
 }
-
 
 .description-textarea {
   width: 100%;
@@ -182,7 +180,7 @@ input[type="checkbox"]:checked + label {
 .add-room-type-stepper {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Ensures the items are vertically aligned */
+  align-items: center; 
   margin-bottom: 20px;
 }
 
@@ -192,7 +190,7 @@ input[type="checkbox"]:checked + label {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  position: relative; /* To position the line relative to each step */
+  position: relative; 
 }
 
 .step .circle {
@@ -260,27 +258,30 @@ input[type="checkbox"]:checked + label {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 20px;
 }
 
-.left-buttons {
-  display: flex;
-  justify-content: flex-start;
+.navigation-buttons .back-btn {
+  margin-right: auto;
 }
 
-/* Style for the back button */
-.left-buttons button {
-  background-color: lightgray;  /* Set light gray background */
-  border: none;                 /* Remove border */
-  padding: 10px 20px;           /* Add padding for better look */
-  font-size: 16px;              /* Set font size */
-  cursor: pointer;             /* Show pointer cursor */
-  border-radius: 5px;           /* Optional: Rounded corners */
+.submit-btn {
+  background-color:  #18304A; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
-.right-buttons {
-  display: flex;
-  justify-content: flex-end;
+
+
+.navigation-buttons .next-btn,
+.navigation-buttons button[type="submit"],
+.navigation-buttons button[type="button"]:not(.back-btn) {
+  margin-left: 10px;
 }
+
 
 .navigation-buttons button.next-btn {
   background-color: #18304A;
@@ -314,4 +315,19 @@ input[type="checkbox"]:checked + label {
 
 span {
   font-size: 14px;
+}
+
+/* Default color (gray) */
+.input-default {
+  border: 1px solid gray !important;
+}
+
+/* Invalid input (red) */
+.input-error {
+  border: 1px solid red !important;
+}
+
+/* Valid input (green) */
+.input-valid {
+  border: 1px solid green !important;
 }

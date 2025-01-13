@@ -71,11 +71,16 @@ const RoomType = () => {
   const handleCapacitySortOrder = (e) => setCapacitySortOrder(e.target.value);
 
   const handleAddRoomType = (roomTypeData) => {
-    // In a real scenario, here we would update the backend.
-    // For now, we'll simply add the room type to the state directly.
     setRoomTypes([...roomTypes, roomTypeData]);
     setIsAddRoomTypeOpen(false);
     alert('Room type added successfully');
+  };
+
+  const handleResetFilters = () => {
+    setSearchTerm("");
+    setRoomTypeFilter("");
+    setRateSortOrder("");
+    setCapacitySortOrder("");
   };
 
   // Apply filters
@@ -99,7 +104,7 @@ const RoomType = () => {
         : b.capacity - a.capacity;
     }
     
-    return 0; // No sorting if no sort order is set
+    return 0; 
   });
 
   return (
@@ -112,7 +117,7 @@ const RoomType = () => {
 
         {/* Room Type Filter */}
         <div className="filter-option">
-          <label>Room Type</label>
+          <label>Room Type:</label>
           <select value={roomTypeFilter} onChange={handleRoomTypeFilter}>
             <option value="">All</option>
             <option value="Standard Room">Standard Room</option>
@@ -123,7 +128,7 @@ const RoomType = () => {
 
         {/* Rate Sort Order */}
         <div className="filter-option">
-          <label>Sort by Rate</label>
+          <label>Sort by Rate:</label>
           <select value={rateSortOrder} onChange={handleRateSortOrder}>
             <option value="">Sort by Rate</option>
             <option value="asc">Low to High</option>
@@ -133,7 +138,7 @@ const RoomType = () => {
 
         {/* Capacity Sort Order */}
         <div className="filter-option">
-          <label>Sort by Capacity</label>
+          <label>Sort by Capacity:</label>
           <select value={capacitySortOrder} onChange={handleCapacitySortOrder}>
             <option value="">Sort by Capacity</option>
             <option value="asc">Low to High</option>
@@ -149,6 +154,12 @@ const RoomType = () => {
             onChange={handleSearch}
           />
         </div>
+
+        {/* Reset Filters Button */}
+        <button className="reset-filters-roomtype-btn" onClick={handleResetFilters}>
+          Reset Filters
+        </button>
+
         <button className="add-room-type-btn" onClick={() => setIsAddRoomTypeOpen(true)}>
           + Add Room Type
         </button>

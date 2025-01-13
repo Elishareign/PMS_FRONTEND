@@ -133,6 +133,7 @@
     
   }
 
+
   #search {
     display: flex;
     justify-content: flex-start;
@@ -219,7 +220,7 @@
     /* Table */
 
   .sub-tab-content{
-    margin-top: 50px;
+    margin-top: 5px;
     background-color: #ffffff;
     overflow-x: auto; 
     width: 1370px;
